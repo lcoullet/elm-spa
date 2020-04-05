@@ -32,21 +32,29 @@ page =
 view : Utils.Spa.PageContext -> Element Msg
 view { global } =
     column
-        [ spacing 24
-        , case global.device.class of
+        (case global.device.class of
             Phone ->
-                paddingXY 12 24
+                [ paddingXY 8 24
+                , width (fill |> maximum 320)
+                , centerX
+                ]
 
             Tablet ->
-                paddingXY 64 24
+                [ paddingXY 16 24
+                , width (fill |> maximum 640)
+                , centerX
+                ]
 
             Desktop ->
-                paddingXY 128 64
+                [ paddingXY 32 64
+                , centerX
+                , width (fill |> maximum 800)
+                ]
 
             BigDesktop ->
-                paddingXY 230 64
-        ]
-        [ el [ Region.heading 1, Font.size 32 ] (text "A propos")
-        , Element.paragraph [] [ text "Salut les amis, comment ça va ? " ]
-        , Element.paragraph [] [ text "Moi ça va bien et vous ?" ]
+                [ paddingXY 64 64, centerX, width (fill |> maximum 800) ]
+        )
+        [ el [ Region.heading 1, Font.size 24 ] (text "A propos")
+        , Element.paragraph [ Font.size 16 ] [ text "Salut les amis, comment ça va ? " ]
+        , Element.paragraph [ Font.size 16 ] [ text "Moi ça va bien et vous ?" ]
         ]

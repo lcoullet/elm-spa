@@ -11395,6 +11395,11 @@ var $ryannhg$elm_spa$Spa$Page$static = function (page) {
 			};
 		});
 };
+var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
+	return {$: 'AlignX', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Model$CenterX = {$: 'CenterX'};
+var $mdgriffith$elm_ui$Element$centerX = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$CenterX);
 var $mdgriffith$elm_ui$Internal$Model$Unkeyed = function (a) {
 	return {$: 'Unkeyed', a: a};
 };
@@ -16689,6 +16694,10 @@ var $mdgriffith$elm_ui$Element$el = F2(
 				_List_fromArray(
 					[child])));
 	});
+var $mdgriffith$elm_ui$Internal$Model$Fill = function (a) {
+	return {$: 'Fill', a: a};
+};
+var $mdgriffith$elm_ui$Element$fill = $mdgriffith$elm_ui$Internal$Model$Fill(1);
 var $mdgriffith$elm_ui$Internal$Model$Describe = function (a) {
 	return {$: 'Describe', a: a};
 };
@@ -16696,6 +16705,14 @@ var $mdgriffith$elm_ui$Internal$Model$Heading = function (a) {
 	return {$: 'Heading', a: a};
 };
 var $mdgriffith$elm_ui$Element$Region$heading = A2($elm$core$Basics$composeL, $mdgriffith$elm_ui$Internal$Model$Describe, $mdgriffith$elm_ui$Internal$Model$Heading);
+var $mdgriffith$elm_ui$Internal$Model$Max = F2(
+	function (a, b) {
+		return {$: 'Max', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Element$maximum = F2(
+	function (i, l) {
+		return A2($mdgriffith$elm_ui$Internal$Model$Max, i, l);
+	});
 var $mdgriffith$elm_ui$Internal$Model$PaddingStyle = F5(
 	function (a, b, c, d, e) {
 		return {$: 'PaddingStyle', a: a, b: b, c: c, d: d, e: e};
@@ -16728,10 +16745,6 @@ var $mdgriffith$elm_ui$Element$paddingXY = F2(
 				x));
 	});
 var $mdgriffith$elm_ui$Internal$Model$Paragraph = {$: 'Paragraph'};
-var $mdgriffith$elm_ui$Internal$Model$Fill = function (a) {
-	return {$: 'Fill', a: a};
-};
-var $mdgriffith$elm_ui$Element$fill = $mdgriffith$elm_ui$Internal$Model$Fill(1);
 var $mdgriffith$elm_ui$Internal$Model$SpacingStyle = F3(
 	function (a, b, c) {
 		return {$: 'SpacingStyle', a: a, b: b, c: c};
@@ -16789,23 +16802,43 @@ var $author$project$Pages$About$view = function (_v0) {
 	var global = _v0.global;
 	return A2(
 		$mdgriffith$elm_ui$Element$column,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$spacing(24),
-				function () {
-				var _v1 = global.device._class;
-				switch (_v1.$) {
-					case 'Phone':
-						return A2($mdgriffith$elm_ui$Element$paddingXY, 12, 24);
-					case 'Tablet':
-						return A2($mdgriffith$elm_ui$Element$paddingXY, 64, 24);
-					case 'Desktop':
-						return A2($mdgriffith$elm_ui$Element$paddingXY, 128, 64);
-					default:
-						return A2($mdgriffith$elm_ui$Element$paddingXY, 230, 64);
-				}
-			}()
-			]),
+		function () {
+			var _v1 = global.device._class;
+			switch (_v1.$) {
+				case 'Phone':
+					return _List_fromArray(
+						[
+							A2($mdgriffith$elm_ui$Element$paddingXY, 8, 24),
+							$mdgriffith$elm_ui$Element$width(
+							A2($mdgriffith$elm_ui$Element$maximum, 320, $mdgriffith$elm_ui$Element$fill)),
+							$mdgriffith$elm_ui$Element$centerX
+						]);
+				case 'Tablet':
+					return _List_fromArray(
+						[
+							A2($mdgriffith$elm_ui$Element$paddingXY, 16, 24),
+							$mdgriffith$elm_ui$Element$width(
+							A2($mdgriffith$elm_ui$Element$maximum, 640, $mdgriffith$elm_ui$Element$fill)),
+							$mdgriffith$elm_ui$Element$centerX
+						]);
+				case 'Desktop':
+					return _List_fromArray(
+						[
+							A2($mdgriffith$elm_ui$Element$paddingXY, 32, 64),
+							$mdgriffith$elm_ui$Element$centerX,
+							$mdgriffith$elm_ui$Element$width(
+							A2($mdgriffith$elm_ui$Element$maximum, 800, $mdgriffith$elm_ui$Element$fill))
+						]);
+				default:
+					return _List_fromArray(
+						[
+							A2($mdgriffith$elm_ui$Element$paddingXY, 64, 64),
+							$mdgriffith$elm_ui$Element$centerX,
+							$mdgriffith$elm_ui$Element$width(
+							A2($mdgriffith$elm_ui$Element$maximum, 800, $mdgriffith$elm_ui$Element$fill))
+						]);
+			}
+		}(),
 		_List_fromArray(
 			[
 				A2(
@@ -16813,19 +16846,25 @@ var $author$project$Pages$About$view = function (_v0) {
 				_List_fromArray(
 					[
 						$mdgriffith$elm_ui$Element$Region$heading(1),
-						$mdgriffith$elm_ui$Element$Font$size(32)
+						$mdgriffith$elm_ui$Element$Font$size(24)
 					]),
 				$mdgriffith$elm_ui$Element$text('A propos')),
 				A2(
 				$mdgriffith$elm_ui$Element$paragraph,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(16)
+					]),
 				_List_fromArray(
 					[
 						$mdgriffith$elm_ui$Element$text('Salut les amis, comment ça va ? ')
 					])),
 				A2(
 				$mdgriffith$elm_ui$Element$paragraph,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(16)
+					]),
 				_List_fromArray(
 					[
 						$mdgriffith$elm_ui$Element$text('Moi ça va bien et vous ?')
@@ -16858,11 +16897,6 @@ var $mdgriffith$elm_ui$Element$alpha = function (o) {
 			'transparency-' + $mdgriffith$elm_ui$Internal$Model$floatClass(transparency),
 			transparency));
 };
-var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
-	return {$: 'AlignX', a: a};
-};
-var $mdgriffith$elm_ui$Internal$Model$CenterX = {$: 'CenterX'};
-var $mdgriffith$elm_ui$Element$centerX = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$CenterX);
 var $mdgriffith$elm_ui$Internal$Model$AlignY = function (a) {
 	return {$: 'AlignY', a: a};
 };
@@ -17213,7 +17247,11 @@ var $author$project$Pages$Top$view = A2(
 						[
 							$mdgriffith$elm_ui$Element$alpha(0.5)
 						]),
-					$mdgriffith$elm_ui$Element$text('(you\'re doing great already!)'))
+					$mdgriffith$elm_ui$Element$text('(you\'re doing great already!)')),
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_Nil,
+					$mdgriffith$elm_ui$Element$text('Test du responsive avec elm-ui'))
 				])),
 			A2(
 			$mdgriffith$elm_ui$Element$newTabLink,
@@ -17405,23 +17443,25 @@ var $author$project$Generated$Pages$update = F2(
 		return $ryannhg$elm_spa$Spa$Page$keep(bigModel);
 	});
 var $author$project$Layout$respState = function (dev) {
-	switch (dev.$) {
-		case 'Phone':
-			return $mdgriffith$elm_ui$Element$text('Phone');
-		case 'Desktop':
-			return $mdgriffith$elm_ui$Element$text('Desktop');
-		default:
-			return $mdgriffith$elm_ui$Element$text('Dont\'know');
-	}
+	return A2(
+		$mdgriffith$elm_ui$Element$el,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Font$size(12)
+			]),
+		function () {
+			switch (dev.$) {
+				case 'Phone':
+					return $mdgriffith$elm_ui$Element$text('Phone');
+				case 'Desktop':
+					return $mdgriffith$elm_ui$Element$text('Desktop');
+				case 'Tablet':
+					return $mdgriffith$elm_ui$Element$text('Tablet');
+				default:
+					return $mdgriffith$elm_ui$Element$text('Big Desktop');
+			}
+		}());
 };
-var $mdgriffith$elm_ui$Internal$Model$Max = F2(
-	function (a, b) {
-		return {$: 'Max', a: a, b: b};
-	});
-var $mdgriffith$elm_ui$Element$maximum = F2(
-	function (i, l) {
-		return A2($mdgriffith$elm_ui$Internal$Model$Max, i, l);
-	});
 var $mdgriffith$elm_ui$Internal$Model$paddingName = F4(
 	function (top, right, bottom, left) {
 		return 'pad-' + ($elm$core$String$fromInt(top) + ('-' + ($elm$core$String$fromInt(right) + ('-' + ($elm$core$String$fromInt(bottom) + ('-' + $elm$core$String$fromInt(left)))))));

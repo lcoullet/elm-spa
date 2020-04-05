@@ -8,15 +8,20 @@ import Utils.Spa as Spa
 
 respState : DeviceClass -> Element msg
 respState dev =
-    case dev of
-        Phone ->
-            text "Phone"
+    Element.el [ Font.size 12 ]
+        (case dev of
+            Phone ->
+                text "Phone"
 
-        Desktop ->
-            text "Desktop"
+            Desktop ->
+                text "Desktop"
 
-        _ ->
-            text "Dont'know"
+            Tablet ->
+                text "Tablet"
+
+            BigDesktop ->
+                text "Big Desktop"
+        )
 
 
 view : Spa.LayoutContext msg -> Element msg
