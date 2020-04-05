@@ -37,6 +37,7 @@ view =
         [ column [ spacing 14 ]
             [ el [ centerX, Font.size 48, Font.semiBold ] (text "elm-spa")
             , el [ alpha 0.5 ] (text "(you're doing great already!)")
+            , el [] (text "Test du responsive avec elm-ui")
             ]
         , newTabLink
             [ Font.underline
